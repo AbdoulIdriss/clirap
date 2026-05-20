@@ -95,8 +95,7 @@ const i18n = {
       footer_testi:"Témoignages", footer_news:"Actualités",
       footer_campuses:"Nos Campus", footer_contact:"Contact",
       footer_copy:"© 2025 CLIRAP — Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. Tous droits réservés.",
-      footer_privacy:"Politique de Confidentialité", footer_terms:"Conditions d'Utilisation", footer_sitemap:"Plan du Site",
-      scroll_hint:"Défiler"
+      footer_privacy:"Politique de Confidentialité", footer_terms:"Conditions d'Utilisation", footer_sitemap:"Plan du Site"
     },
     en: {
       nav_tagline:"Join Us, Go Far!",
@@ -191,8 +190,7 @@ const i18n = {
       footer_testi:"Student Stories", footer_news:"News & Events",
       footer_campuses:"Our Campuses", footer_contact:"Contact",
       footer_copy:"© 2025 CLIRAP — Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. All rights reserved.",
-      footer_privacy:"Privacy Policy", footer_terms:"Terms of Use", footer_sitemap:"Sitemap",
-      scroll_hint:"Scroll"
+      footer_privacy:"Privacy Policy", footer_terms:"Terms of Use", footer_sitemap:"Sitemap"
     }
   };
   
@@ -734,6 +732,15 @@ const i18n = {
     // 18. INIT
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', () => { resize(); spawnParticles(); });
+  
+    // On touch / mobile: remove animation delays so hero content is always visible
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      document.querySelectorAll('.hero-badge, .hero-title, .hero-sub, .hero-actions, .hero-stats').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.animation = 'none';
+      });
+    }
   
     setTimeout(() => {
       initCanvas();
