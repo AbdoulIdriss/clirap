@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLIRAP – Cercle Culturel pour la Promotion des Langues, le Développement et la Paix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div id="scroll-progress"></div>
+
+<!-- Floating particles canvas -->
+<canvas id="particleCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.35"></canvas>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<a href="https://wa.me/22892561281" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="logo-emblem">
+      <img src="https://clirap-education.org/wp-content/uploads/2022/06/logo-removebg-preview.png"
+           alt="CLIRAP Logo"
+           onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Playfair Display,serif;font-size:1.2rem;font-weight:900;color:var(--green)\'>CLIRAP</span>'">
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about"        data-i18n="nav_about">À Propos</a></li>
+    <li><a href="#languages"    data-i18n="nav_lang">Langues</a></li>
+    <li><a href="#services"     data-i18n="nav_services">Services</a></li>
+    <li><a href="#campuses"     data-i18n="nav_campuses">Campus</a></li>
+    <li><a href="#testimonials" data-i18n="nav_stories">Témoignages</a></li>
+    <li><a href="#contact" class="nav-cta" data-i18n="nav_enroll">S'inscrire</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="lang-toggle">
+      <button id="btnFr" class="active">FR</button>
+      <button id="btnEn">EN</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">✦ Association Culturelle Internationale · Depuis 2006</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero_title_line1">Votre Passerelle vers</span><br>
+      <em data-i18n="hero_title_line2">l'Éducation Internationale</em><br>
+      <span class="gold-word" data-i18n="hero_title_line3">Légale</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">
+      CLIRAP offre aux jeunes Africains une formation linguistique de haut niveau, des voies certifiées vers l'international et un accompagnement complet pour étudier à l'étranger — en toute légalité.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary"><span data-i18n="hero_btn1">Découvrir nos cours</span><span>→</span></a>
+      <a href="#contact"  class="btn-outline" data-i18n="hero_btn2">Consultation gratuite</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">18<sup>+</sup></div>
+        <div class="stat-label" data-i18n="stat1">Années d'excellence</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">9</div>
+        <div class="stat-label" data-i18n="stat2">Campus internationaux</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6<sup>+</sup></div>
+        <div class="stat-label" data-i18n="stat3">Langues enseignées</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5K<sup>+</sup></div>
+        <div class="stat-label" data-i18n="stat4">Diplômés dans le monde</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-main">
+      <svg class="hero-map-bg" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M80,200 Q150,100 250,150 T400,120 T550,200" stroke="white" stroke-width="1.5" fill="none"/>
+        <path d="M50,280 Q200,200 350,250 T550,220" stroke="white" stroke-width="1" fill="none" stroke-dasharray="4,6"/>
+        <circle cx="250" cy="150" r="6" fill="white"/><circle cx="400" cy="120" r="6" fill="white"/>
+        <circle cx="130" cy="220" r="6" fill="white"/><circle cx="480" cy="200" r="6" fill="white"/>
+        <path d="M130,220 L250,150" stroke="white" stroke-width=".8" stroke-dasharray="3,5"/>
+        <path d="M250,150 L400,120" stroke="white" stroke-width=".8" stroke-dasharray="3,5"/>
+        <path d="M400,120 L480,200" stroke="white" stroke-width=".8" stroke-dasharray="3,5"/>
+      </svg>
+      <div class="hero-card-tag">✦ RÉSEAU CLIRAP</div>
+      <h2 class="hero-card-quote" data-i18n="hero_card_quote">"Mobilité légale.<br>Compétences globales.<br>Avenir africain."</h2>
+      <div class="hero-campus-pills">
+        <div class="campus-pill">🇨🇲 Yaoundé</div>
+        <div class="campus-pill">🇹🇬 Lomé</div>
+        <div class="campus-pill">🇨🇮 Abidjan</div>
+        <div class="campus-pill">🇬🇭 Accra</div>
+        <div class="campus-pill">🇮🇹 Turin</div>
+        <div class="campus-pill">🇨🇬 Brazzaville</div>
+      </div>
+    </div>
+    <div class="float-card fc1">
+      <div class="fc-label" data-i18n="fc1_label">Fondé en</div>
+      <div class="fc-value">2006</div>
+      <div class="fc-sub">Yaoundé, Cameroun</div>
+    </div>
+    <div class="float-card fc2">
+      <div class="fc-label" style="margin-bottom:8px;" data-i18n="fc2_label">Langues enseignées</div>
+      <div class="fc2-content">
+        <div class="flag-circle">🇮🇹</div><div class="flag-circle">🇩🇪</div>
+        <div class="flag-circle">🇬🇧</div><div class="flag-circle">🇪🇸</div>
+        <div class="flag-circle">🇫🇷</div><div class="flag-circle">🌍</div>
+      </div>
+      <div class="fc2-text" style="margin-top:8px;" data-i18n="fc2_sub">6+ Langues Internationales</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-arrow"><div class="scroll-dot"></div></div>
+    <span data-i18n="scroll_hint">Défiler</span>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal slide-left">
+      <div class="about-main-card">
+        <div class="kente-strip"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <blockquote class="about-founder-quote" data-i18n="founder_quote">
+          "Il est toujours bon de voyager. La mobilité pour les études ou l'expérience professionnelle internationale est un excellent moyen de combattre l'ignorance. Interagir avec d'autres peuples et cultures est une richesse inestimable."
+        </blockquote>
+        <div class="about-founder-name">— Dr. Assadio, Fondateur &amp; Président, CLIRAP</div>
+        <div class="about-origin" data-i18n="about_origin">
+          Né de la tragédie des migrations illégales en Méditerranée — Dr. Assadio, alors doctorant à l'Université de Nottingham, a fondé CLIRAP en 2006 pour offrir aux jeunes Africains des voies légales, sûres et valorisantes vers l'éducation à l'étranger.
+        </div>
+      </div>
+      <div class="about-side-card">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase;" data-i18n="mission_title">Notre Mission Fondamentale</div>
+        <div class="mission-items">
+          <div class="mission-item"><div class="mission-dot"></div><span data-i18n="mission1">Informer la jeunesse sur les dangers de la migration illégale</span></div>
+          <div class="mission-item"><div class="mission-dot"></div><span data-i18n="mission2">Former aux langues mondiales et aux certifications internationales</span></div>
+          <div class="mission-item"><div class="mission-dot"></div><span data-i18n="mission3">Guider les étudiants dans les démarches légales de mobilité</span></div>
+          <div class="mission-item"><div class="mission-dot"></div><span data-i18n="mission4">Encourager les diplômés à rentrer développer l'Afrique</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-content reveal slide-right reveal-delay-2">
+      <div class="section-tag" data-i18n="about_tag">Qui Sommes-Nous</div>
+      <h2 class="section-title">
+        Cercle Culturel pour la Promotion des<br>
+        <em style="font-family:'Playfair Display',serif;color:var(--green);">Langues, le Développement et la Paix</em>
+      </h2>
+      <p class="about-body" data-i18n="about_body1">
+        CLIRAP est une association culturelle internationale dont le siège est à Yaoundé, au Cameroun, avec un réseau de campus à travers l'Afrique de l'Ouest, l'Afrique Centrale et l'Europe. Depuis 2006, nous sommes l'institution de référence pour la formation linguistique, les certifications internationales et l'accompagnement à la mobilité légale pour les jeunes Africains.
+      </p>
+      <p class="about-body" data-i18n="about_body2">
+        Nous croyons que le développement de l'Afrique passe par sa jeunesse. Notre modèle trois-en-un — excellence linguistique, médiation culturelle et accompagnement à la mobilité internationale — est unique sur le continent.
+      </p>
+      <div class="about-values">
+        <div class="value-card">
+          <div class="value-icon">🎓</div>
+          <div class="value-title" data-i18n="val1_t">Excellence Académique</div>
+          <div class="value-desc"  data-i18n="val1_d">30h/semaine de cours intensifs avec des formateurs certifiés</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <div class="value-title" data-i18n="val2_t">Migration Légale</div>
+          <div class="value-desc"  data-i18n="val2_d">Accompagnement complet visa &amp; admissions pour des parcours sûrs</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🌍</div>
+          <div class="value-title" data-i18n="val3_t">Fierté Africaine</div>
+          <div class="value-desc"  data-i18n="val3_d">Promotion de la culture, de l'identité et des langues africaines</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔄</div>
+          <div class="value-title" data-i18n="val4_t">Retour &amp; Construction</div>
+          <div class="value-desc"  data-i18n="val4_d">Encourager les diplômés à ramener leurs compétences en Afrique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LANGUAGES ===== -->
+<section id="languages">
+  <div style="text-align:center;margin-bottom:52px;" class="reveal">
+    <div class="section-tag" data-i18n="lang_tag">Ce Que Nous Enseignons</div>
+    <h2 class="section-title" data-i18n="lang_title">Les Langues Qui Ouvrent des Portes</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.7);margin:0 auto 0;" data-i18n="lang_sub">Du niveau A1 débutant au C2 expert — tous les niveaux, tous les parcours.</p>
+  </div>
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item"><span class="marquee-dot"></span>Italien A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Allemand A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Anglais A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Espagnol A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Portugais A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Langues Africaines</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>CILS · CERT.IT · ÖSD · DELF · DALF</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Italian A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>German A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>English A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Spanish A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Portuguese A1–C2</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>African Languages</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>CILS · CERT.IT · ÖSD · DELF · DALF</span>
+    </div>
+  </div>
+  <div class="lang-grid stagger-children">
+    <div class="lang-card reveal reveal-delay-1">
+      <span class="lang-flag">🇮🇹</span>
+      <div class="lang-name">Italien</div>
+      <div class="lang-levels" data-i18n="lang_all_levels">A1 → C2 · Tous niveaux</div>
+      <span class="lang-badge">CILS · CERT.IT</span>
+    </div>
+    <div class="lang-card reveal reveal-delay-2">
+      <span class="lang-flag">🇩🇪</span>
+      <div class="lang-name">Allemand</div>
+      <div class="lang-levels" data-i18n="lang_beg_adv">Débutant → Avancé</div>
+      <span class="lang-badge">ÖSD Certifié</span>
+    </div>
+    <div class="lang-card reveal reveal-delay-1">
+      <span class="lang-flag">🇬🇧</span>
+      <div class="lang-name">Anglais</div>
+      <div class="lang-levels" data-i18n="lang_all_exams">Tous niveaux &amp; examens</div>
+      <span class="lang-badge" data-i18n="lang_intl">International</span>
+    </div>
+    <div class="lang-card reveal reveal-delay-2">
+      <span class="lang-flag">🇪🇸</span>
+      <div class="lang-name">Espagnol</div>
+      <div class="lang-levels" data-i18n="lang_bus_acad">Professionnel &amp; Académique</div>
+      <span class="lang-badge">DELE Prep</span>
+    </div>
+    <div class="lang-card reveal reveal-delay-3">
+      <span class="lang-flag">🇵🇹</span>
+      <div class="lang-name">Portugais</div>
+      <div class="lang-levels" data-i18n="lang_conv_write">Expression orale &amp; écrite</div>
+      <span class="lang-badge">CELPE-Bras</span>
+    </div>
+    <div class="lang-card reveal reveal-delay-1">
+      <span class="lang-flag">🇫🇷</span>
+      <div class="lang-name">Français</div>
+      <div class="lang-levels" data-i18n="lang_fr_levels">Prépa universitaire · DELF</div>
+      <span class="lang-badge">DELF · DALF</span>
+    </div>
+    <div class="lang-card featured reveal reveal-delay-2">
+      <div>
+        <span class="lang-flag">🌍</span>
+        <div class="lang-name" data-i18n="lang_african_name">Langues Africaines</div>
+        <div class="lang-levels" data-i18n="lang_african_sub">Préserver &amp; célébrer nos racines</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:rgba(15,31,22,.7);margin-bottom:8px;" data-i18n="lang_by_campus">Disponible par campus :</div>
+        <div class="featured-langs">
+          <span class="feat-lang">Ewondo (Yaoundé)</span>
+          <span class="feat-lang">Yemba (Dschang)</span>
+          <span class="feat-lang">Douala</span>
+          <span class="feat-lang">Ewe (Lomé)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="reveal" style="text-align:center;">
+    <div class="section-tag" data-i18n="serv_tag">Accompagnement Complet</div>
+    <h2 class="section-title"><span data-i18n="serv_title1">Tout ce qu'il vous faut pour</span><br><em style="font-family:'Playfair Display',serif;color:var(--green);" data-i18n="serv_title2">Réussir vos Études à l'Étranger</em></h2>
+    <p class="section-sub" style="margin:0 auto 52px;" data-i18n="serv_sub">Notre modèle trois-en-un couvre tout votre parcours — du premier cours au visa.</p>
+  </div>
+  <div class="services-grid stagger-children">
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">🗣️</div>
+      <h3 class="service-title" data-i18n="s1_t">Formation Linguistique</h3>
+      <p class="service-desc"   data-i18n="s1_d">30 heures de cours intensifs par semaine, du lundi au vendredi, dispensés par des formateurs qualifiés natifs ou experts utilisant des méthodes pédagogiques modernes.</p>
+      <div class="service-tags"><span class="stag">A1–C2</span><span class="stag">30h/semaine</span><span class="stag" data-i18n="s1_tag">Locuteurs natifs</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">📜</div>
+      <h3 class="service-title" data-i18n="s2_t">Certifications Internationales</h3>
+      <p class="service-desc"   data-i18n="s2_d">Préparation complète aux certifications CILS, CERT.IT, ÖSD, DELF, DALF et autres diplômes reconnus à l'international, requis pour l'admission universitaire.</p>
+      <div class="service-tags"><span class="stag">CILS</span><span class="stag">CERT.IT</span><span class="stag">ÖSD</span><span class="stag">DELF/DALF</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">🎓</div>
+      <h3 class="service-title" data-i18n="s3_t">Admissions Universitaires</h3>
+      <p class="service-desc"   data-i18n="s3_d">Accompagnement étape par étape pour les bacheliers et licenciés souhaitant s'inscrire dans des universités italiennes, allemandes, belges et chinoises.</p>
+      <div class="service-tags"><span class="stag">Italie</span><span class="stag">Allemagne</span><span class="stag">Belgique</span><span class="stag">Chine</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">📁</div>
+      <h3 class="service-title" data-i18n="s4_t">Traduction &amp; Légalisation</h3>
+      <p class="service-desc"   data-i18n="s4_d">Traduction officielle et légalisation de vos documents académiques pour les ambassades, consulats italiens et institutions africaines à l'étranger. Suivi en temps réel inclus.</p>
+      <div class="service-tags"><span class="stag" data-i18n="s4_tag1">Certifié Ambassade</span><span class="stag" data-i18n="s4_tag2">Suivi en ligne</span><span class="stag" data-i18n="s4_tag3">Rapide</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">🌐</div>
+      <h3 class="service-title" data-i18n="s5_t">Médiation Culturelle</h3>
+      <p class="service-desc"   data-i18n="s5_d">Formation à la communication interculturelle, à l'interprétariat et à la traduction. Préparez les étudiants à évoluer avec confiance dans les environnements académiques et professionnels occidentaux.</p>
+      <div class="service-tags"><span class="stag" data-i18n="s5_tag1">Traduction</span><span class="stag" data-i18n="s5_tag2">Interprétariat</span><span class="stag" data-i18n="s5_tag3">Prépa culturelle</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">📣</div>
+      <h3 class="service-title" data-i18n="s6_t">Événements d'Orientation</h3>
+      <p class="service-desc"   data-i18n="s6_d">Conférences régulières sur les opportunités d'études à l'étranger, les stratégies de réussite académique en Europe, les besoins en compétences pour le développement africain et les programmes de retour.</p>
+      <div class="service-tags"><span class="stag" data-i18n="s6_tag1">Conférences</span><span class="stag" data-i18n="s6_tag2">Réseautage</span><span class="stag" data-i18n="s6_tag3">Orientation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW ===== -->
+<section id="how">
+  <div class="reveal" style="max-width:600px;margin:0 auto 64px;text-align:center;">
+    <div class="section-tag" data-i18n="how_tag">Le Processus</div>
+    <h2 class="section-title" data-i18n="how_title">Votre Parcours en 4 Étapes</h2>
+    <p class="section-sub" style="margin-bottom:0;" data-i18n="how_sub">De votre premier contact avec CLIRAP au jour où vous atterrissez dans votre université de rêve.</p>
+  </div>
+  <div class="steps-container">
+    <div class="step-item reveal reveal-delay-1">
+      <div class="step-number"><span class="step-num-text">01</span></div>
+      <h3 class="step-title" data-i18n="step1_t">Test Gratuit</h3>
+      <p class="step-desc"   data-i18n="step1_d">Passez un test de niveau pour évaluer vos compétences actuelles. Entièrement gratuit, sans engagement.</p>
+    </div>
+    <div class="step-item reveal reveal-delay-2">
+      <div class="step-number"><span class="step-num-text">02</span></div>
+      <h3 class="step-title" data-i18n="step2_t">S'inscrire &amp; Se Former</h3>
+      <p class="step-desc"   data-i18n="step2_d">Rejoignez votre cours sur mesure. 30h/semaine de formation intensive, lun–ven, avec des formateurs experts.</p>
+    </div>
+    <div class="step-item reveal reveal-delay-3">
+      <div class="step-number"><span class="step-num-text">03</span></div>
+      <h3 class="step-title" data-i18n="step3_t">Obtenir sa Certification</h3>
+      <p class="step-desc"   data-i18n="step3_d">Passez et réussissez votre certification linguistique internationale. CLIRAP vous prépare au niveau B2 ou C1.</p>
+    </div>
+    <div class="step-item reveal reveal-delay-4">
+      <div class="step-number"><span class="step-num-text">04</span></div>
+      <h3 class="step-title" data-i18n="step4_t">Postuler &amp; Partir</h3>
+      <p class="step-desc"   data-i18n="step4_d">Notre service des admissions gère votre dossier complet — de la candidature universitaire au visa, logement et préparation au voyage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAMPUSES ===== -->
+<section id="campuses">
+  <div class="campus-intro">
+    <div class="reveal">
+      <div class="section-tag" data-i18n="camp_tag">Notre Réseau</div>
+      <h2 class="section-title"><span data-i18n="camp_title1">9 Campus en</span><br><em style="font-family:'Playfair Display',serif;color:var(--green);" data-i18n="camp_title2">Afrique &amp; en Europe</em></h2>
+      <p class="section-sub" style="margin-bottom:0;" data-i18n="camp_sub">Du cœur de Yaoundé à Turin, en Italie — CLIRAP est là où vous en avez besoin.</p>
+    </div>
+    <div class="reveal reveal-delay-2" style="display:flex;align-items:center;justify-content:flex-end;">
+      <div style="background:var(--green);border-radius:var(--radius);padding:32px;color:white;max-width:280px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:12px;" data-i18n="camp_coord">Coordination Internationale</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;line-height:1.1;margin-bottom:12px;">Bureau de Turin 🇮🇹</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.6;" data-i18n="camp_turin_desc">Notre hub européen coordonne les admissions en Master, la légalisation des documents et le soutien étudiant dans toutes les institutions italiennes.</div>
+        <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--gold-light);">WhatsApp : +39 348 037 2548</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="campus-grid stagger-children">
+
+    <!-- Cameroun campuses -->
+    <div class="campus-card hq reveal reveal-delay-1">
+      <div class="campus-icon">🇨🇲</div>
+      <div class="campus-info">
+        <div class="campus-city">Yaoundé</div>
+        <div class="campus-country">Cameroun</div>
+        <span class="hq-badge" data-i18n="camp_hq">Siège Social</span>
+      </div>
+    </div>
+
+    <div class="campus-card reveal reveal-delay-2">
+      <div class="campus-icon">🇨🇲</div>
+      <div class="campus-info">
+        <div class="campus-city">Douala</div>
+        <div class="campus-country">Cameroun</div>
+        <span class="campus-est">Est. 2006</span>
+      </div>
+    </div>
+
+    <div class="campus-card reveal reveal-delay-3">
+      <div class="campus-icon">🇨🇲</div>
+      <div class="campus-info">
+        <div class="campus-city">Dschang</div>
+        <div class="campus-country">Cameroun</div>
+        <span class="campus-est" data-i18n="camp_univ_city">Ville Universitaire</span>
+      </div>
+    </div>
+
+    <div class="campus-card reveal reveal-delay-1">
+      <div class="campus-icon">🇨🇲</div>
+      <div class="campus-info">
+        <div class="campus-city">Bastos</div>
+        <div class="campus-country">Cameroun</div>
+        <span class="campus-est" data-i18n="camp_premium">Campus Premium</span>
+      </div>
+    </div>
+
+    <!-- Togo -->
+    <div class="campus-card reveal reveal-delay-2">
+      <div class="campus-icon">🇹🇬</div>
+      <div class="campus-info">
+        <div class="campus-city">Lomé</div>
+        <div class="campus-country">Togo</div>
+        <span class="campus-est">Est. 2012</span>
+      </div>
+    </div>
+
+    <!-- Côte d'Ivoire -->
+    <div class="campus-card reveal reveal-delay-3">
+      <div class="campus-icon">🇨🇮</div>
+      <div class="campus-info">
+        <div class="campus-city">Abidjan</div>
+        <div class="campus-country">Côte d'Ivoire</div>
+        <span class="campus-est">Est. 2016</span>
+      </div>
+    </div>
+
+    <!-- Ghana -->
+    <div class="campus-card reveal reveal-delay-1">
+      <div class="campus-icon">🇬🇭</div>
+      <div class="campus-info">
+        <div class="campus-city">Accra</div>
+        <div class="campus-country">Ghana</div>
+        <span class="campus-est" data-i18n="camp_wa">Hub Afrique Occ.</span>
+      </div>
+    </div>
+
+    <!-- Congo -->
+    <div class="campus-card reveal reveal-delay-2">
+      <div class="campus-icon">🇨🇬</div>
+      <div class="campus-info">
+        <div class="campus-city">Brazzaville</div>
+        <div class="campus-country">Congo</div>
+        <span class="campus-est" data-i18n="camp_ca">Afrique Centrale</span>
+      </div>
+    </div>
+
+    <!-- Italy -->
+    <div class="campus-card reveal reveal-delay-3">
+      <div class="campus-icon">🇮🇹</div>
+      <div class="campus-info">
+        <div class="campus-city">Turin</div>
+        <div class="campus-country">Italie</div>
+        <span class="campus-est" data-i18n="camp_eu">Siège Européen</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div style="text-align:center;margin-bottom:52px;" class="reveal">
+    <div class="section-tag" data-i18n="testi_tag">Témoignages d'Étudiants</div>
+    <h2 class="section-title" data-i18n="testi_title">La Voix de Nos Diplômés</h2>
+    <p class="section-sub" style="margin:0 auto;" data-i18n="testi_sub">De Lomé à Milan, de Yaoundé à Francfort — de vraies personnes, de vraies réussites.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-i18n="testi1">"CLIRAP a changé ma vie. En seulement 7 mois, je suis passée de zéro en italien à la certification B2, et je suis maintenant inscrite à l'Università di Bologna."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AK</div>
+        <div><div class="testi-name">Ama Kofi</div><div class="testi-location">Lomé → Bologna, Italie 🇮🇹</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-i18n="testi2">"J'étais sur le point de payer un passeur pour traverser la mer. Un ami m'a parlé de CLIRAP. Deux ans plus tard, j'ai un Master en Ingénierie de Turin — légalement, en toute sécurité, avec fierté."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">BN</div>
+        <div><div class="testi-name">Blaise Nkomo</div><div class="testi-location">Yaoundé → Turin, Italie 🇮🇹</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-3">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-i18n="testi3">"Le cours d'allemand de CLIRAP est intensif mais les professeurs sont exceptionnels. J'ai réussi mon examen ÖSD du premier coup et j'ai obtenu une place à la TU Berlin."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">FT</div>
+        <div><div class="testi-name">Fatou Traoré</div><div class="testi-location">Abidjan → Berlin, Allemagne 🇩🇪</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section id="news">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;" class="reveal">
+    <div>
+      <div class="section-tag" data-i18n="news_tag">Actualités</div>
+      <h2 class="section-title" style="margin-bottom:0;" data-i18n="news_title">Nouvelles &amp; Événements</h2>
+    </div>
+    <a href="#contact" class="btn-outline" style="white-space:nowrap;" data-i18n="news_all">Tout voir →</a>
+  </div>
+  <div class="news-grid stagger-children">
+    <div class="news-card reveal reveal-delay-1">
+      <div class="news-img"><span class="news-img-icon">🏆</span></div>
+      <div class="news-body">
+        <span class="news-cat" data-i18n="news1_cat">Certification</span>
+        <h3 class="news-title"  data-i18n="news1_t">Premier Examen ÖSD en Afrique de l'Ouest — Organisé par CLIRAP Lomé</h3>
+        <p class="news-excerpt" data-i18n="news1_d">CLIRAP Lomé est entré dans l'histoire en organisant le tout premier examen de certification allemand ÖSD dans la sous-région ouest-africaine, ouvrant de nouvelles portes aux étudiants togolais.</p>
+        <div class="news-date">📅 Janvier 2025</div>
+      </div>
+    </div>
+    <div class="news-card reveal reveal-delay-2">
+      <div class="news-img"><span class="news-img-icon">🤝</span></div>
+      <div class="news-body">
+        <span class="news-cat" data-i18n="news2_cat">Partenariat</span>
+        <h3 class="news-title"  data-i18n="news2_t">CLIRAP &amp; CDAB COMPASS Signent un Accord de Collaboration</h3>
+        <p class="news-excerpt" data-i18n="news2_d">Une nouvelle alliance pour mieux détecter les profils étudiants, concevoir des parcours sur mesure et accélérer l'intégration des étudiants africains dans les universités françaises, allemandes et italiennes.</p>
+        <div class="news-date">📅 Février 2024</div>
+      </div>
+    </div>
+    <div class="news-card reveal reveal-delay-3">
+      <div class="news-img"><span class="news-img-icon">📡</span></div>
+      <div class="news-body">
+        <span class="news-cat" data-i18n="news3_cat">Médias</span>
+        <h3 class="news-title"  data-i18n="news3_t">Dr. Assadio Invité sur NEKTAR — La Préparation Culturelle au-delà de la Langue</h3>
+        <p class="news-excerpt" data-i18n="news3_d">Le Président de CLIRAP participe à une émission télévisée nationale pour expliquer comment la préparation culturelle, au-delà des compétences linguistiques, est essentielle à la réussite des étudiants africains en Europe.</p>
+        <div class="news-date">📅 Mars 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-tag" data-i18n="contact_tag">Nous Contacter</div>
+      <h2 class="section-title"><span data-i18n="contact_title1">Prêt à Commencer</span><br><em style="font-family:'Playfair Display',serif;color:var(--green);" data-i18n="contact_title2">Votre Voyage ?</em></h2>
+      <p class="contact-body" data-i18n="contact_body">Que vous soyez étudiant, parent ou institution partenaire — nous sommes là pour vous. Contactez-nous via le formulaire, WhatsApp ou directement sur le campus CLIRAP le plus proche.</p>
+      <div class="contact-items">
+        <a href="mailto:cliraplome@gmail.com" class="contact-item">
+          <div class="ci-icon">📧</div>
+          <div><div class="ci-label" data-i18n="ci1_label">Nous Écrire</div><div class="ci-value">cliraplome@gmail.com</div></div>
+        </a>
+        <a href="https://wa.me/22892561281" class="contact-item" target="_blank">
+          <div class="ci-icon" style="background:var(--green);display:grid;place-items:center">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div><div class="ci-label" data-i18n="ci2_label">WhatsApp (Lomé)</div><div class="ci-value">+228 92 56 12 81</div></div>
+        </a>
+        <a href="https://wa.me/393480372548" class="contact-item" target="_blank">
+          <div class="ci-icon">🇮🇹</div>
+          <div><div class="ci-label" data-i18n="ci3_label">Coordination Italie / Masters</div><div class="ci-value">+39 348 037 2548</div></div>
+        </a>
+        <div class="contact-item" style="cursor:default;">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-label" data-i18n="ci4_label">Adresse Campus Lomé</div><div class="ci-value">Adidogomé Doganto, Lomé, Togo</div></div>
+        </div>
+      </div>
+      <div class="contact-social">
+        <a href="https://www.facebook.com/clirapeducational/" class="social-btn fb" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#1877f2;transition:fill .2s"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UCY_AU6fiar-Z_6Z_anH7BNQ" class="social-btn yt" target="_blank" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#ff0000;transition:fill .2s"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://wa.me/22892561281" class="social-btn wa" target="_blank" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#25d366;transition:fill .2s"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/dersprachenhub/" class="social-btn ig" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#c13584;transition:fill .2s"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <div style="background:var(--cream);border-radius:var(--radius);padding:40px;border:1px solid var(--border);">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:6px;" data-i18n="form_title">Demander une Consultation Gratuite</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:28px;" data-i18n="form_sub">Remplissez vos informations et un conseiller CLIRAP vous contactera dans les 24 heures.</p>
+        <div class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="form_fname">Prénom</label>
+              <input type="text" data-i18n-placeholder="form_fname_ph">
+            </div>
+            <div class="form-group">
+              <label data-i18n="form_lname">Nom de famille</label>
+              <input type="text" data-i18n-placeholder="form_lname_ph">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_email">Adresse e-mail</label>
+            <input type="email" data-i18n-placeholder="form_email_ph">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_phone">WhatsApp / Téléphone</label>
+            <input type="tel" placeholder="+228 9X XXX XXX">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="form_campus">Campus le plus proche</label>
+              <select>
+                <option data-i18n="form_campus_sel">Choisir un campus...</option>
+                <option>Yaoundé (HQ)</option><option>Douala</option><option>Dschang</option>
+                <option>Lomé</option><option>Abidjan</option><option>Accra</option>
+                <option>Brazzaville</option><option>Turin (Italie)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-i18n="form_lang">Langue souhaitée</label>
+              <select>
+                <option data-i18n="form_lang_sel">Choisir une langue...</option>
+                <option data-i18n="opt_it">Italien</option>
+                <option data-i18n="opt_de">Allemand</option>
+                <option data-i18n="opt_en">Anglais</option>
+                <option data-i18n="opt_es">Espagnol</option>
+                <option data-i18n="opt_fr">Français</option>
+                <option data-i18n="opt_pt">Portugais</option>
+                <option data-i18n="opt_af">Langue Africaine</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_msg">Votre message (facultatif)</label>
+            <textarea data-i18n-placeholder="form_msg_ph"></textarea>
+          </div>
+          <button class="form-submit" onclick="handleSubmit()">
+            <span data-i18n="form_submit">Envoyer ma demande ✦</span>
+          </button>
+          <a href="https://wa.me/22892561281?text=Bonjour%20CLIRAP!%20Je%20voudrais%20me%20renseigner%20sur%20les%20inscriptions." class="form-wa" target="_blank">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-i18n="form_wa_btn">Ou Discuter sur WhatsApp</span>
+          </a>
+        </div>
+        <div id="formSuccess" style="display:none;text-align:center;padding:40px 20px;">
+          <div style="font-size:3rem;margin-bottom:16px;">✅</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--green);margin-bottom:8px;" data-i18n="form_success_t">Demande envoyée !</h3>
+          <p style="color:var(--text-muted);font-size:14px;" data-i18n="form_success_d">Un conseiller CLIRAP vous contactera dans les 24 heures. Rejoignez-nous, Allez Loin ! 🌍</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-wrap">
+        <div class="footer-logo-box"><span>CLR</span></div>
+        <div>
+          <div class="footer-brand-name">CLIRAP</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.06em;" data-i18n="footer_tagline_sm">Rejoignez-nous, Allez Loin !</div>
+        </div>
+      </div>
+      <p class="footer-tagline" data-i18n="footer_tagline">Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. Au service de la jeunesse africaine depuis 2006.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/clirapeducational/" class="f-social" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#1877f2;transition:fill .2s"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UCY_AU6fiar-Z_6Z_anH7BNQ" class="f-social" target="_blank" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#ff0000;transition:fill .2s"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://wa.me/22892561281" class="f-social" target="_blank" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#25d366;transition:fill .2s"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/dersprachenhub/" class="f-social" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#c13584;transition:fill .2s"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer_nav">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#about"        data-i18n="footer_about">À Propos de CLIRAP</a></li>
+        <li><a href="#languages"    data-i18n="footer_lang">Langues</a></li>
+        <li><a href="#services"     data-i18n="footer_serv">Services</a></li>
+        <li><a href="#how"          data-i18n="footer_how">Comment ça marche</a></li>
+        <li><a href="#campuses"     data-i18n="footer_camp">Campus</a></li>
+        <li><a href="#testimonials" data-i18n="footer_testi">Témoignages</a></li>
+        <li><a href="#news"         data-i18n="footer_news">Actualités</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer_campuses">Nos Campus</div>
+      <ul class="footer-links">
+        <li><a href="#campuses">🇨🇲 Yaoundé (HQ)</a></li>
+        <li><a href="#campuses">🇨🇲 Douala</a></li>
+        <li><a href="#campuses">🇨🇲 Dschang</a></li>
+        <li><a href="#campuses">🇹🇬 Lomé</a></li>
+        <li><a href="#campuses">🇨🇮 Abidjan</a></li>
+        <li><a href="#campuses">🇬🇭 Accra</a></li>
+        <li><a href="#campuses">🇮🇹 Turin</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer_contact">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:cliraplome@gmail.com">✉ cliraplome@gmail.com</a></li>
+        <li><a href="https://wa.me/22892561281" target="_blank">+228 92 56 12 81</a></li>
+        <li><a href="#">📍 Adidogomé Doganto, Lomé</a></li>
+        <li><a href="https://wa.me/393480372548" target="_blank">🇮🇹 +39 348 037 2548</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy" data-i18n="footer_copy">© 2025 CLIRAP — Tous droits réservés.</div>
+    <div class="footer-bottom-links">
+      <a href="#" data-i18n="footer_privacy">Politique de Confidentialité</a>
+      <a href="#" data-i18n="footer_terms">Conditions d'Utilisation</a>
+      <a href="#" data-i18n="footer_sitemap">Plan du Site</a>
+    </div>
+  </div>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+</html>
