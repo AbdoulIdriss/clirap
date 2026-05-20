@@ -248,35 +248,45 @@ const i18n = {
   });
   
   // =============================================
-  // CURSOR
+  // CURSOR — desktop / fine-pointer only
   // =============================================
   const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let cx = 0, cy = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    cx = e.clientX; cy = e.clientY;
-    cursor.style.left = cx + 'px';
-    cursor.style.top = cy + 'px';
-  });
-  (function animRing() {
-    rx += (cx - rx) * .12;
-    ry += (cy - ry) * .12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  })();
-  document.querySelectorAll('a,button,.lang-card,.service-card,.campus-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px'; cursor.style.height = '20px';
-      ring.style.width = '52px'; ring.style.height = '52px';
-      ring.style.borderColor = 'var(--gold)';
+  const ring   = document.getElementById('cursor-ring');
+  
+  if (window.matchMedia('(pointer: fine)').matches) {
+    let cx = 0, cy = 0, rx = 0, ry = 0;
+  
+    document.addEventListener('mousemove', e => {
+      cx = e.clientX; cy = e.clientY;
+      cursor.style.left = cx + 'px';
+      cursor.style.top  = cy + 'px';
     });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '12px'; cursor.style.height = '12px';
-      ring.style.width = '36px'; ring.style.height = '36px';
-      ring.style.borderColor = 'var(--green)';
+  
+    (function animRing() {
+      rx += (cx - rx) * .12;
+      ry += (cy - ry) * .12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+  
+    document.querySelectorAll('a,button,.lang-card,.service-card,.campus-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width  = '20px'; cursor.style.height = '20px';
+        ring.style.width    = '52px'; ring.style.height   = '52px';
+        ring.style.borderColor = 'var(--gold)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width  = '12px'; cursor.style.height = '12px';
+        ring.style.width    = '36px'; ring.style.height   = '36px';
+        ring.style.borderColor = 'var(--green)';
+      });
     });
-  });
+  } else {
+    /* touch device — hide the elements entirely */
+    if (cursor) cursor.style.display = 'none';
+    if (ring)   ring.style.display   = 'none';
+  }
   
   // =============================================
   // NAVBAR SCROLL
