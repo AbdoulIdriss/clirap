@@ -335,31 +335,104 @@ footer { background:var(--dark);color:rgba(255,255,255,.8);padding:72px 5% 80px;
   /* --- hero --- */
   #hero {
     grid-template-columns: 1fr;
-    padding: 82px 4% 48px;
+    padding: 0;
     min-height: 0;
     height: auto;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: block;          /* let the inner wrapper control layout */
   }
-  .hero-content { padding: 0; width: 100%; }
+
+  /* breathing wrapper — pushes content well below navbar */
+  .hero-content {
+    padding: 100px 5% 52px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    /* soft green-tinted gradient so it feels like a "section" not floating text */
+    background: linear-gradient(160deg, rgba(26,74,46,.04) 0%, rgba(200,150,10,.03) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* gold accent line just below the navbar — gives visual separation */
+  .hero-content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 5%; right: 5%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-light), var(--green), var(--gold-light));
+    border-radius: 0 0 3px 3px;
+    opacity: .5;
+  }
+
   .hero-badge {
-    font-size: 10px; padding: 5px 10px;
-    white-space: normal; margin-bottom: 16px;
+    font-size: 10.5px;
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    animation: none; opacity: 1;
+    display: inline-flex;
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    line-height: 1.12;
+    margin-bottom: 16px;
     animation: none; opacity: 1;
   }
-  .hero-title { font-size: clamp(1.75rem, 7vw, 2.6rem); margin-bottom: 14px; animation: none; opacity: 1; }
-  .hero-sub { font-size: 14px; max-width: 100%; margin-bottom: 24px; animation: none; opacity: 1; }
-  .hero-actions { flex-direction: row; flex-wrap: wrap; gap: 10px; width: 100%; animation: none; opacity: 1; }
+
+  .hero-sub {
+    font-size: 14.5px;
+    line-height: 1.65;
+    max-width: 100%;
+    margin-bottom: 28px;
+    animation: none; opacity: 1;
+    color: var(--text-muted);
+  }
+
+  /* buttons — side by side, equal width */
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 0;
+    animation: none; opacity: 1;
+  }
   .hero-actions .btn-primary,
-  .hero-actions .btn-outline { flex: 1 1 auto; min-width: 0; justify-content: center; box-sizing: border-box; padding: 12px 18px; font-size: 14px; }
+  .hero-actions .btn-outline {
+    justify-content: center;
+    text-align: center;
+    padding: 13px 10px;
+    font-size: 13.5px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* stats — 2×2 grid, clean card style */
   .hero-stats {
-    flex-wrap: wrap; gap: 12px;
-    padding-top: 20px; margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 32px;
+    padding-top: 0;
+    border-top: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
     animation: none; opacity: 1;
   }
-  .hero-stats .stat-item { flex: 1 1 calc(50% - 6px); min-width: 0; }
-  .stat-number { font-size: 1.7rem; }
+  .hero-stats .stat-item {
+    background: var(--white);
+    padding: 18px 16px;
+    flex: none;
+    min-width: 0;
+  }
+  .hero-stats .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .hero-stats .stat-item:nth-child(1),
+  .hero-stats .stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+
+  .stat-number { font-size: 1.8rem; }
+  .stat-label  { font-size: 11px; margin-top: 2px; }
+
   .hero-visual { display: none; }
 
   /* --- about --- */
@@ -421,7 +494,12 @@ footer { background:var(--dark);color:rgba(255,255,255,.8);padding:72px 5% 80px;
 ═══════════════════════════════════════ */
 @media (max-width: 480px) {
   section { padding: 40px 4%; }
-  #hero { padding: 78px 4% 40px; min-height: 0; height: auto; }
+  #hero { padding: 0; }
+  .hero-content { padding: 92px 4% 44px; }
+  .hero-title { font-size: clamp(1.65rem, 8vw, 2.2rem); }
+  .hero-actions { grid-template-columns: 1fr 1fr; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { font-size: 12.5px; padding: 12px 8px; }
 
   .lang-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .lang-card { padding: 16px 10px; }
