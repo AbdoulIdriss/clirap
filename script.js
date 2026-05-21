@@ -5,7 +5,7 @@ const i18n = {
     fr: {
       nav_tagline:"Rejoignez-nous, Allez Loin !",
       nav_about:"À Propos", nav_lang:"Langues", nav_services:"Services",
-      nav_campuses:"Campus", nav_stories:"Témoignages", nav_enroll:"S'inscrire",
+      nav_campuses:"Campus", nav_partners:"Partenaires", nav_stories:"Témoignages", nav_enroll:"S'inscrire",
       hero_badge:"✦ Association Culturelle Internationale · Depuis 2006",
       hero_title_line1:"Votre Passerelle vers",
       hero_title_line2:"l'Éducation Internationale",
@@ -62,7 +62,13 @@ const i18n = {
       camp_turin_desc:"Notre hub européen coordonne les admissions en Master, la légalisation des documents et le soutien étudiant dans toutes les institutions italiennes.",
       camp_hq:"Siège Social", camp_univ_city:"Ville Universitaire", camp_premium:"Campus Premium",
       camp_wa:"Hub Afrique Occ.", camp_ca:"Afrique Centrale", camp_eu:"Siège Européen",
-      testi_tag:"Témoignages d'Étudiants", testi_title:"La Voix de Nos Diplômés",
+      partners_tag:"Réseau Académique", partners_title:"Nos Partenaires Internationaux",
+      partners_sub:"Des universités reconnues en Italie et en Chine qui accueillent nos diplômés.",
+      partner1_desc:"Centre CILS officiel — certifications de langue italienne pour étrangers.",
+      partner2_desc:"Partenariat pour les admissions en Licence et Master dans toutes les disciplines.",
+      partner3_desc:"Programmes en langues, économie et sciences humaines à Venise.",
+      partner4_desc:"L'une des plus anciennes universités d'Italie, fondée en 1308. Large offre de Masters.",
+      partner5_desc:"Passerelle vers les universités chinoises — ingénierie, sciences et technologies.", testi_title:"La Voix de Nos Diplômés",
       testi_sub:"De Lomé à Milan, de Yaoundé à Francfort — de vraies personnes, de vraies réussites.",
       testi1:"« CLIRAP a changé ma vie. En seulement 7 mois, je suis passée de zéro en italien à la certification B2, et je suis maintenant inscrite à l'Università di Bologna. L'accompagnement administratif était incroyable — je n'ai jamais dû me débrouiller seule. »",
       testi2:"« J'étais sur le point de payer un passeur pour traverser la mer. Un ami m'a parlé de CLIRAP. Deux ans plus tard, j'ai un Master en Ingénierie de Turin — légalement, en toute sécurité, avec fierté. »",
@@ -92,7 +98,7 @@ const i18n = {
       footer_tagline:"Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. Au service de la jeunesse africaine depuis 2006.",
       footer_nav:"Navigation", footer_about:"À Propos de CLIRAP", footer_lang:"Langues",
       footer_serv:"Services", footer_how:"Comment ça marche", footer_camp:"Campus",
-      footer_testi:"Témoignages", footer_news:"Actualités",
+      footer_partners:"Partenaires", footer_testi:"Témoignages", footer_news:"Actualités",
       footer_campuses:"Nos Campus", footer_contact:"Contact",
       footer_copy:"© 2025 CLIRAP — Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. Tous droits réservés.",
       footer_privacy:"Politique de Confidentialité", footer_terms:"Conditions d'Utilisation", footer_sitemap:"Plan du Site"
@@ -100,7 +106,7 @@ const i18n = {
     en: {
       nav_tagline:"Join Us, Go Far!",
       nav_about:"About", nav_lang:"Languages", nav_services:"Services",
-      nav_campuses:"Campuses", nav_stories:"Stories", nav_enroll:"Enroll Now",
+      nav_campuses:"Campuses", nav_partners:"Partners", nav_stories:"Stories", nav_enroll:"Enroll Now",
       hero_badge:"✦ International Cultural Association · Since 2006",
       hero_title_line1:"Your Gateway to",
       hero_title_line2:"International Education",
@@ -157,7 +163,13 @@ const i18n = {
       camp_turin_desc:"Our European hub coordinates Masters admissions, document legalization, and student support across all Italian institutions.",
       camp_hq:"Headquarters", camp_univ_city:"University City", camp_premium:"Premium Campus",
       camp_wa:"West Africa Hub", camp_ca:"Central Africa", camp_eu:"European HQ",
-      testi_tag:"Student Stories", testi_title:"Voices of Our Alumni",
+      partners_tag:"Academic Network", partners_title:"Our International Partners",
+      partners_sub:"Recognised universities in Italy and China welcoming our graduates.",
+      partner1_desc:"Official CILS centre — Italian language certifications for foreign students.",
+      partner2_desc:"Partnership for Bachelor's and Master's admissions across all disciplines.",
+      partner3_desc:"Programmes in languages, economics and humanities in Venice.",
+      partner4_desc:"One of Italy's oldest universities, founded in 1308. Wide range of Masters.",
+      partner5_desc:"Gateway to Chinese universities — engineering, science and technology.", testi_title:"Voices of Our Alumni",
       testi_sub:"From Lomé to Milan, from Yaoundé to Frankfurt — real people, real success stories.",
       testi1:"\"CLIRAP changed my life. In just 7 months I went from zero Italian to B2 certified, and now I'm enrolled at Università di Bologna. The administrative support was incredible — I never had to figure anything out alone.\"",
       testi2:"\"I was about to pay a trafficker to cross the sea. A friend told me about CLIRAP. Two years later I have a Master's degree in Engineering from Turin — legally, safely, proudly.\"",
@@ -187,7 +199,7 @@ const i18n = {
       footer_tagline:"Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. Empowering African youth since 2006.",
       footer_nav:"Quick Links", footer_about:"About CLIRAP", footer_lang:"Languages",
       footer_serv:"Services", footer_how:"How It Works", footer_camp:"Campuses",
-      footer_testi:"Student Stories", footer_news:"News & Events",
+      footer_partners:"Partners", footer_testi:"Student Stories", footer_news:"News & Events",
       footer_campuses:"Our Campuses", footer_contact:"Contact",
       footer_copy:"© 2025 CLIRAP — Cercle Culturel pour la Promotion des Langues, le Développement et la Paix. All rights reserved.",
       footer_privacy:"Privacy Policy", footer_terms:"Terms of Use", footer_sitemap:"Sitemap"
@@ -438,7 +450,7 @@ const i18n = {
   
     // 3. SECTION WATERMARKS
     const allSections = document.querySelectorAll('section[id]');
-    const sectionNums = ['01', '02', '03', '04', '05', '06', '07', '08', '09'];
+    const sectionNums = ['01','02','03','04','05','06','07','08','09','10'];
     allSections.forEach((sec, i) => {
       const wm = document.createElement('div');
       wm.className = 'sec-watermark';
